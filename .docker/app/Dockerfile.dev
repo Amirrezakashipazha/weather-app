@@ -1,0 +1,17 @@
+# Stage 1: Build the app with Bun
+FROM oven/bun:latest as build
+
+WORKDIR /app
+
+# Install dependencies only (without build step)
+COPY package.json bun.lockb* ./
+RUN bun install
+
+# Copy the rest of the files for development
+COPY . .
+
+# Expose the port for the Next.js development server
+EXPOSE 3000
+
+# Start the Next.js development server with Bun and enable hot-reloading
+CMD ["bun", "next", "dev"]

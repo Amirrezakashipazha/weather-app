@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+
+  app_local:
+    profiles: [local]
+    container_name: ${SERVICE_NAME}_app_local
+    image: ${SERVICE_NAME}_app_local
+    build:
+      context: .
+      dockerfile: ./.docker/app/Dockerfile.dev
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /.env
+    ports:
+      - "${PORT:-3000}:3000"
+    networks:
+      - local
+
+  app_production:
+    profiles: [production, staging]
+    container_name: ${SERVICE_NAME}_app_production
+    image: ${SERVICE_NAME}_app_production
+    build:
+      context: .
+      dockerfile: ./.docker/app/Dockerfile.prod
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+    networks:
+      - local
+    restart: always
+
+  nginx:
+    profiles: [production, staging]
+    container_name: ${SERVICE_NAME}_nginx
+    image: ${SERVICE_NAME}_nginx
+    tty: true
+    build:
+      dockerfile: ./.docker/nginx/Dockerfile
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+    ports:
+      - "${PORT:-8080}:80"
+    networks:
+      - local
+    restart: always
+
+
+networks:
+  local:
+    driver: bridge
+
+
