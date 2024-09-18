@@ -1,17 +1,16 @@
-# Stage 1: Build the app with Bun
-FROM oven/bun:latest as build
+FROM node:20-alpine3.19
 
 WORKDIR /app
 
-# Install dependencies only (without build step)
-COPY package.json bun.lockb* ./
-RUN bun install
+RUN apk add --no-cache bash && npm install -g pnpm
 
-# Copy the rest of the files for development
+COPY package.json ./
+
+RUN pnpm install
+
 COPY . .
 
-# Expose the port for the Next.js development server
-EXPOSE 3000
+ENV NODE_OPTIONS=--max-old-space-size=16384
+ENV GENERATE_SOURCEMAP=false
 
-# Start the Next.js development server with Bun and enable hot-reloading
-CMD ["bun", "next", "dev"]
+CMD pnpm run dev

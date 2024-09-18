@@ -1,28 +1,32 @@
-# Stage 1: Build the app with Bun
-FROM oven/bun:latest as build
+# Build Stage
+FROM node:20-alpine3.19 AS build
 
 WORKDIR /app
 
-# Copy all files to the working directory
+RUN apk add --no-cache bash && npm install -g pnpm
+
+COPY package.json ./
+RUN pnpm install
+
 COPY . .
 
-# Install dependencies and build the app
-RUN bun install
-RUN bun next build
+RUN pnpm run build
 
-# Stage 2: Serve the app
-FROM oven/bun:latest
+
+# Production Stage
+FROM node:20-alpine3.19 AS production
 
 WORKDIR /app
 
-# Copy the build files from the previous stage
-COPY --from=build /app/.next /app/.next
-COPY --from=build /app/public /app/public
-COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/package.json /app/package.json
+RUN apk add --no-cache bash && npm install -g pnpm
 
-# Expose the port that the Next.js app runs on
-EXPOSE 3000
+COPY package.json ./
+RUN pnpm install --prod
 
-# Command to run the app
-CMD ["bun", "next", "start"]
+COPY --from=build /app /app
+
+ENV NODE_OPTIONS=--max-old-space-size=16384
+ENV GENERATE_SOURCEMAP=false
+
+CMD pnpm run start
+
