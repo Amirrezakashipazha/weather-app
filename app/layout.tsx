@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 import "./globals.css";
-
+import Layout from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-bg p-6">
+        <Layout>
+        {children}
+        </Layout>
+      </body>
     </html>
   );
 }

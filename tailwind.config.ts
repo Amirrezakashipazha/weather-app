@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import  withMT  from '@material-tailwind/react/utils/withMT';
 
 const config: Config = {
   content: [
@@ -11,7 +12,10 @@ const config: Config = {
       colors:{
         bg:"#0F0F0F",
         card:{
-          800:"#1E1E1E"
+          400:"#5E5E5E",
+          500:"#272727",
+          800:"#1E1E1E",
+
         },
         text:{
           100:"#ffffff"
@@ -26,4 +30,4 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config;
+export default withMT(config);
