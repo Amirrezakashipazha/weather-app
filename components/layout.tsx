@@ -6,8 +6,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeProvider>
-    <div className='flex gap-4 h-[calc(100vh-48px)]'>
-      <div className="bg-card-800 h-full rounded-3xl w-[84px]">
+    <div className='flex gap-4 h-[calc(100vh-48px)] w-[calc(100%-108px)]'>
+      <div className="bg-card-800 h-full rounded-3xl min-w-[84px]">
 
       </div>
       <div className="flex flex-col gap-4 w-full">
@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </div>
       </div>
     </div>
-    </ThemeProvider>
+     </ThemeProvider>
   )
 }
 
