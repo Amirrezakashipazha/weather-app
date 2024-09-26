@@ -79,4 +79,20 @@ export class Daily {
             et0_fao_evapotranspiration: this.et0_fao_evapotranspiration,
         }
     }
+
+
+    getTemperature(){
+        return{
+            temperature:{
+                average:(this.temperature_2m_max+this.temperature_2m_min)/2,
+                temperature_2m_max:this.temperature_2m_max,
+temperature_2m_min:this.temperature_2m_min,
+            },
+            apparent_temperature:{
+                average:(this.apparent_temperature_max+this.apparent_temperature_min)/2,
+apparent_temperature_max:this.apparent_temperature_max,
+apparent_temperature_min:this.apparent_temperature_min,
+}
+}
+    }
 }

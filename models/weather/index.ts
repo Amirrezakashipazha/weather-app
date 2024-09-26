@@ -5,7 +5,7 @@ import { Unit_daily } from "./daily/units"
 import { Hourly } from "./hourly"
 import { Unit_hourly } from "./hourly/units"
 
-export class weather {
+export class weather extends Daily{
     latitude: number
     longitude: number
     generationtime_ms: number
