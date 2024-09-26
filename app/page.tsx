@@ -1,7 +1,7 @@
 "use client";
 import useFetch, { Entry } from "@/hooks/useFetch";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import DialogDefault from "./dialog";
 
@@ -55,7 +55,7 @@ export default function Home() {
         style={{ gridTemplateRows: "55% 45%", gridTemplateColumns: "100%" }}
       >
        <TodaysHighlight/>
-     <ForecastNextFewDays data={dataModel.}/>
+     {dataModel&&<ForecastNextFewDays data={dataModel.getTemperature()}/>}
       </div>
     </div>
   );

@@ -18,9 +18,11 @@ export class weather extends Daily{
     hourly_units: Unit_hourly
     hourly: Hourly
     daily_units: Unit_daily
-    daily: Daily
+    daily: Daily;
+
 
     constructor(weather: weather) {
+        super(weather.daily);
         this.latitude = weather.latitude
         this.longitude = weather.longitude
         this.generationtime_ms = weather.generationtime_ms

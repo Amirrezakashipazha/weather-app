@@ -1,5 +1,19 @@
 import { TDateISO } from "@/types/iso";
 
+export type temperatureDaily={
+    temperature:{
+average:number[],
+temperature_2m_max:number[],
+temperature_2m_min:number[],
+    }
+
+apparent_temperature:{
+    average:number[],
+apparent_temperature_max:number[],
+apparent_temperature_min:number[],
+}
+
+}
 export class Daily {
     time: TDateISO[];
     weather_code: number[];
@@ -81,18 +95,18 @@ export class Daily {
     }
 
 
-    getTemperature(){
-        return{
-            temperature:{
-                average:(this.temperature_2m_max+this.temperature_2m_min)/2,
-                temperature_2m_max:this.temperature_2m_max,
-temperature_2m_min:this.temperature_2m_min,
+    getTemperature():temperatureDaily {
+        return {
+            temperature: {
+                average: this.temperature_2m_min.map((item, index) =>Math.round((item + this.temperature_2m_max[index]) / 2)),
+                temperature_2m_max: this.temperature_2m_max,
+                temperature_2m_min: this.temperature_2m_min,
             },
-            apparent_temperature:{
-                average:(this.apparent_temperature_max+this.apparent_temperature_min)/2,
-apparent_temperature_max:this.apparent_temperature_max,
-apparent_temperature_min:this.apparent_temperature_min,
-}
-}
+            apparent_temperature: {
+                average: this.apparent_temperature_min.map((item, index) =>Math.round((item + this.apparent_temperature_max[index]) / 2)),
+                apparent_temperature_max: this.apparent_temperature_max,
+                apparent_temperature_min: this.apparent_temperature_min,
+            }
+        }
     }
 }
