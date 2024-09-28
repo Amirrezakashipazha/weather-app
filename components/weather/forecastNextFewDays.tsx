@@ -48,7 +48,7 @@ const ForecastNextFewDays = ({data}:{data:temperatureDaily}) => {
 
       <Swiper
         spaceBetween={16}
-        slidesPerView={5.5}
+        slidesPerView={5.2}
         // onSlideChange={() => console.log("slide change")}
         // onSwiper={(swiper) => console.log(swiper)}
         className="h-[calc(100%-48px)] mt-5"

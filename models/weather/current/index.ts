@@ -23,9 +23,9 @@ export class Current {
     constructor(current: Current) {
         this.time = current.time
         this.interval = current.interval
-        this.temperature_2m = current.temperature_2m
+        this.temperature_2m = Math.round(current.temperature_2m)
         this.relative_humidity_2m = current.relative_humidity_2m
-        this.apparent_temperature = current.apparent_temperature
+        this.apparent_temperature = Math.round(current.apparent_temperature)
         this.is_day = current.is_day
         this.precipitation = current.precipitation
         this.rain = current.rain
@@ -45,9 +45,9 @@ export class Current {
         return {
             time: this.time,
             interval: this.interval,
-            temperature_2m: this.temperature_2m,
+            temperature_2m: Math.round(this.temperature_2m),
             relative_humidity_2m: this.relative_humidity_2m,
-            apparent_temperature: this.apparent_temperature,
+            apparent_temperature: Math.round(this.apparent_temperature),
             is_day: this.is_day,
             precipitation: this.precipitation,
             rain: this.rain,
