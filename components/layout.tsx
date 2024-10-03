@@ -21,7 +21,6 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import useFetch, { Entry } from "@/hooks/useFetch";
 import { Countries, CountrySummaryInformation } from "@/models/countries";
-import { SkeletonSimpleCard } from "./skeleton";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -88,7 +87,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             <div className="">
               <div className="flex items-center justify-center gap-4 ![&>div>lable]:after-none">
                 <div className="select-search-countries [&>div>ul]:bg-card-800 relative">
-                  {dataModelCountries?.data ? (
+                  {
                     <Select
                       value={selectedCountry?.name.common}
                       onClick={() => setOpenMenuCountries(!openMenuCountries)}
@@ -109,30 +108,32 @@ const Layout = ({ children }: { children: ReactNode }) => {
                           }
                         />
                       </div>
-                      {dataSelect && dataSelect?.length > 0 ? (
-                        dataSelect.map((item, index) => (
-                          <Option
-                            key={index}
-                            onClick={() => setSelectedCountry(item)}
-                            className="bg-card-800 border-gray-700 text-white"
-                          >
-                            <div className="flex items-center gap-1">
-                              <img
-                                src={item.flag}
-                                alt=""
-                                className="w-6 h-full"
-                              />
-                              {item.name.common}
-                            </div>
-                          </Option>
-                        ))
+                      {dataModelCountries?.data ? (
+                        dataSelect && dataSelect?.length > 0 ? (
+                          dataSelect.map((item, index) => (
+                            <Option
+                              key={index}
+                              onClick={() => setSelectedCountry(item)}
+                              className="bg-card-800 border-gray-700 text-white"
+                            >
+                              <div className="flex items-center gap-1">
+                                <img
+                                  src={item.flag}
+                                  alt=""
+                                  className="w-6 h-full"
+                                />
+                                {item.name.common}
+                              </div>
+                            </Option>
+                          ))
+                        ) : (
+                          <Option className="text-white">no result</Option>
+                        )
                       ) : (
-                        <Option className="text-white">no result</Option>
+                        <p>loading....</p>
                       )}
                     </Select>
-                  ) : (
-                    <SkeletonSimpleCard className="min-w-[333px] min-h-[40px] h-[40px] rounded-[999px]" />
-                  )}
+                  }
                 </div>
                 <Switch crossOrigin="anonymous" />
                 <Menu open={openMenu} handler={setOpenMenu}>

@@ -7,8 +7,18 @@ import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SkeletonContent } from "../skeleton";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 const LocationWeatherCard = ({ data }: { data?: weather }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(!open);
+
   const [tempatoreUnit, setTempatoreUnit] = useState<boolean>(true);
 
   const [dataModel, setDataModel] = useState<Current>();
@@ -47,7 +57,7 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
   return (
     <div className="bg-card-800 rounded-2xl p-4 max-h-[50vh] text-white relative">
       <div className=" w-full flex items-start justify-between">
-        <Button className="py-1 px-4 rounded-xl bg-card-500 flex justify-between items-center font-normal">
+        <Button className="py-1 px-4 rounded-xl bg-card-500 flex justify-between items-center font-normal" onClick={handleOpen}>
           <Image
             src="/assets/images/weather/location.svg"
             width={24}
@@ -65,13 +75,35 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
         </Button>
       </div>
       <div className="">
-        <div className="absolute top-14 left-4">
+        <div className="absolute top-14 left-4" >
           <p className="text-4xl font-medium">{getFormattedDate().weekday}</p>
           <span className="text-base">{getFormattedDate().fullDate}</span>
         </div>
+        <Dialog open={open} handler={handleOpen}>
+          <DialogHeader>Its a simple modal.</DialogHeader>
+          <DialogBody>
+            The key to more success is to have a lot of pillows. Put it this
+            way, it took me twenty five years to get these plants, twenty five
+            years of blood sweat and tears, and I&apos;m never giving up,
+            I&apos;m just getting started. I&apos;m up to something. Fan luv.
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={handleOpen}
+              className="mr-1"
+            >
+              <span>Cancel</span>
+            </Button>
+            <Button variant="gradient" color="green" onClick={handleOpen}>
+              <span>Confirm</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
 
         <div className="absolute bottom-4 right-4 flex flex-col gap-11 min-w-[150px]">
-          {data?
+          {data ? (
             <>
               <div className="flex flex-col items-end">
                 <p className="font-medium text-4xl">
@@ -89,9 +121,13 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
                   Feels like {dataModel?.apparent_temperature || 0}°
                 </span>
               </div>
-            </>:
-            <SkeletonContent lines={4} className="max-w-[150px] flex flex-col items-end"/>
-          }
+            </>
+          ) : (
+            <SkeletonContent
+              lines={4}
+              className="max-w-[150px] flex flex-col items-end"
+            />
+          )}
         </div>
       </div>
     </div>

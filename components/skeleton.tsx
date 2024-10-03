@@ -30,7 +30,7 @@ export function SkeletonContent({
       <Typography
         as="div"
         variant="h1"
-        className="mb-4 h-3 w-8/12 rounded-full bg-gray-300"
+        className="mb-4 h-3 w-8/12 rounded-full bg-gray-700"
       >
         &nbsp;
       </Typography>
@@ -38,7 +38,8 @@ export function SkeletonContent({
         <Typography
           as="div"
           variant="paragraph"
-          className="mb-2 h-2 w-full rounded-full bg-gray-300"
+          className="mb-2 h-2 w-full rounded-full bg-gray-700"
+          key={index}
         >
           &nbsp;
         </Typography>

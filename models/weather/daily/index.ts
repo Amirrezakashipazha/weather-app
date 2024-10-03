@@ -1,4 +1,5 @@
 import { TDateISO } from "@/types/iso";
+import convertToLocalWithCustomOffset from "@/utils/convert-utc-to-timezone";
 
 export type temperatureDaily = {
     temperature: {
@@ -47,8 +48,10 @@ export class Daily {
         this.temperature_2m_min = daily.temperature_2m_min;
         this.apparent_temperature_max = daily.apparent_temperature_max;
         this.apparent_temperature_min = daily.apparent_temperature_min;
-        this.sunrise = daily.sunrise;
-        this.sunset = daily.sunset;
+        this.sunrise = daily.sunrise.map((item,index)=>
+        convertToLocalWithCustomOffset(item,3,30));
+        this.sunset = daily.sunset.map((item,index)=>
+        convertToLocalWithCustomOffset(item,3,30));
         this.daylight_duration = daily.daylight_duration;
         this.sunshine_duration = daily.sunshine_duration;
         this.uv_index_max = daily.uv_index_max;
