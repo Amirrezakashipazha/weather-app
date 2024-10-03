@@ -26,7 +26,7 @@ const OtherCountries = () => {
               <Image src="/assets/images/weather/arrow.svg" width={16} height={16} alt="arrow" />
             </Button>
           </MenuHandler>
-          <MenuList className='min-w-0 max-h-[230px] overflowY-scroll'>
+          <MenuList className='min-w-0 max-h-[230px] overflowY-scroll bg-card-800 border-gray-700 text-white'>
             {continents.map((item, index) =>
 
               <MenuItem value={index} key={index} onClick={(e) => setState(e.currentTarget.textContent || 'See All')}>{item}</MenuItem>
