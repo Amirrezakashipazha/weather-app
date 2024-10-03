@@ -16,8 +16,14 @@
   }
 }
 
-html {
- 
+.select-search-countries label {
+  color: #fff !important;
+  padding-left: 16px;
+}
+
+.select-search-countries label::after,
+.select-search-countries label::before {
+  display: none;
 }
 
 @layer utilities {
@@ -25,4 +31,19 @@ html {
     text-wrap: balance;
   }
 
+  *::-webkit-scrollbar {
+    @apply bg-card-800;
+    width: 10px;
+    border-radius: 99px
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply bg-card-400;
+    width: 8px;
+    border-radius: 99px
+  }
+
+  input:focus {
+    outline: none !important
+  }
 }
