@@ -46,7 +46,7 @@ export default function Home() {
         className="grid h-[calc(100%-1rem)] gap-4"
         style={{ gridTemplateRows: "45% 55%", gridTemplateColumns: "100%"  }}
       >
-       {data&&<LocationWeatherCard data={data}/>}
+      <LocationWeatherCard data={data}/>
        <OtherCountries/>
       </div>
 
@@ -54,8 +54,8 @@ export default function Home() {
         className="grid h-[calc(100%-1rem)] gap-4"
         style={{ gridTemplateRows: "55% 45%", gridTemplateColumns: "100%" }}
       >
-       {data&&<TodaysHighlight data={data}/>}
-     {dataModel&&<ForecastNextFewDays data={dataModel.getTemperature()}/>}
+    <TodaysHighlight data={data}/>
+    <ForecastNextFewDays data={dataModel?.getTemperature()}/>
       </div>
     </div>
   );
