@@ -21,6 +21,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import useFetch, { Entry } from "@/hooks/useFetch";
 import { Countries, CountrySummaryInformation } from "@/models/countries";
+import Image from "next/image";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -77,7 +78,17 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <ThemeProvider>
       <div className="flex gap-4 h-[calc(100vh-48px)] w-[calc(100%-10px)]">
-        <div className="bg-card-800 h-full rounded-3xl min-w-[84px]"></div>
+        <div className="bg-card-800 h-full rounded-3xl min-w-[84px] flex flex-col items-center justify-between">
+          <div className="pt-12 px-7 mb-6">
+            <Image src="/assets/images/layout/hamberger-menu.svg" width={24} height={24} alt="menu"/>
+          </div>
+          <ul>
+            
+          </ul>
+          <div className="mb-12 px-7 mt-6">
+            <Image src="/assets/images/layout/uil_setting.svg" width={24} height={24} alt="setting"/>
+          </div>
+        </div>
         <div className="flex flex-col gap-4 w-full">
           <div className="flex justify-between w-full">
             <div className="text-white text-sm">

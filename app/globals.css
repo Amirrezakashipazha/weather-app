@@ -47,3 +47,7 @@
     outline: none !important
   }
 }
+
+.leaflet-control-attribution.leaflet-control{
+  display:none
+}

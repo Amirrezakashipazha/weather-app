@@ -13,6 +13,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import Map from "../map";
 
 const LocationWeatherCard = ({ data }: { data?: weather }) => {
   const [open, setOpen] = React.useState(false);
@@ -54,6 +55,8 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
     }
   }, [data]);
 
+  const [positionAccommodation,setPositionAccommodation] = useState<[number, number]>([0, 0]);
+
   return (
     <div className="bg-card-800 rounded-2xl p-4 max-h-[50vh] text-white relative">
       <div className=" w-full flex items-start justify-between">
@@ -79,13 +82,11 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
           <p className="text-4xl font-medium">{getFormattedDate().weekday}</p>
           <span className="text-base">{getFormattedDate().fullDate}</span>
         </div>
-        <Dialog open={open} handler={handleOpen}>
-          <DialogHeader>Its a simple modal.</DialogHeader>
-          <DialogBody>
-            The key to more success is to have a lot of pillows. Put it this
-            way, it took me twenty five years to get these plants, twenty five
-            years of blood sweat and tears, and I&apos;m never giving up,
-            I&apos;m just getting started. I&apos;m up to something. Fan luv.
+        <Dialog open={open} handler={handleOpen} size="xxl">
+          <DialogHeader>Select your location</DialogHeader>
+          <DialogBody className="h-full">
+            <Map editable={true} positionAccommodation={positionAccommodation}
+              setPositionAccommodation={setPositionAccommodation} />
           </DialogBody>
           <DialogFooter>
             <Button
@@ -102,7 +103,7 @@ const LocationWeatherCard = ({ data }: { data?: weather }) => {
           </DialogFooter>
         </Dialog>
 
-        <div className="absolute bottom-4 right-4 flex flex-col gap-11 min-w-[150px]">
+        <div className="absolute bottom-4 right-4 flex flex-col gap-3 3xl:gap-11 min-w-[150px]">
           {data ? (
             <>
               <div className="flex flex-col items-end">
